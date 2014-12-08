@@ -49,7 +49,7 @@ require(['avalon','server','websocket','base'], function(avalon,server,WebSocket
         	alert(111);
         },
         chanelchange:function(id){
-        	alert(id);
+        	 model.rightmsg = base.getRootMsg(model.msgdata.alldata,id);
         },
          selectmsg:function(id){ 
         	model.atid=id;

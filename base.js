@@ -45,19 +45,37 @@ define(function(){
  	var rootdata=[],otherdata=[],curdata=[];
  	curdata=data;
  	for (var i = 0; i < curdata.length; i++) {
- 		if(curdata[i].atroot===0){
- 			rootdata.push(curdata[i]);
+ 		if(curdata[i].atroot===0){ 
+ 			rootdata.push(curdata[i]); 
  			curdata.splice(i,1);
  			i--;
  		}
  	}
+  
  	for (var i = 0; i < curdata.length; i++) {
+ 		var flag=false;
  		for (var j = 0; j < rootdata.length; j++) {
- 			if(rootdata[j].atroot===curdata[i].mid){
+ 			if(rootdata[j].atroot===curdata[i].at){
  				rootdata.push(curdata[i]);
- 			}else{
- 				otherdata.push(curdata[i]);
+ 				curdata.splice(i,1);
+ 				flag=true;
  			}
+ 		}
+ 		
+ 		if(otherdata.length===0){
+ 			otherdata.push(curdata[i]);
+ 		}
+ 		for (var k = 0; k < otherdata.length; k++) {
+ 			if(otherdata[k].atroot !=curdata[i].atroot){
+ 				otherdata.push(curdata[i]);
+ 			}else{
+ 				curdata.splice(i,1);
+ 				flag=true;
+ 			}
+ 		}
+ 		
+ 		if(flag){
+ 			i--
  		}
  	}
  	return{
@@ -76,12 +94,22 @@ define(function(){
  	}
  	return name;
  }
-	
+ function getRootMsg(data,id){
+ 	var rootMsg=[];
+ 	for (var i = 0; i < data.length; i++) {
+ 		if(data[i].atroot===id){
+ 			rootMsg.push(data[i]);
+ 		}
+ 	}
+ 	return rootMsg;
+ }
+ 		
 	
 	return {
 		getWindow :getWindow,
 		formatdata:formatdata,
-		getusrName:getusrName 
+		getusrName:getusrName,
+		getRootMsg:getRootMsg
 	}
 	
 });
