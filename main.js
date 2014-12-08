@@ -9,6 +9,7 @@
         socket:'vendor/socket-io/socket.io-1.2.1',
         server:'server-config',
         websocket:'vendor/websocket/WebSocketEx',
+        base:'base',
         underscore:'vendor/underscore/underscore'
     },
     priority: ['text', 'css'],
@@ -24,7 +25,7 @@
 
 
 
-require(['avalon','server','websocket','underscore'], function(avalon,server,WebSocketEx,_) {//第二块，添加根VM（处理共用部分）
+require(['avalon','server','websocket','base'], function(avalon,server,WebSocketEx,base) {//第二块，添加根VM（处理共用部分）
    
     var model =avalon.define({
         $id: "root",  
@@ -34,6 +35,9 @@ require(['avalon','server','websocket','underscore'], function(avalon,server,Web
         defuid:0,
         atid:0,
         contbg:"",
+        rightwidth:0,
+        msginfoheight:0,
+        middenheight:0,
         msgdata:{},
         rootmsg:[],
         othermsg:[],
@@ -47,13 +51,11 @@ require(['avalon','server','websocket','underscore'], function(avalon,server,Web
         chanelchange:function(id){
         	alert(id);
         },
-         selectmsg:function(id){
-         	alert(id);
+         selectmsg:function(id){ 
         	model.atid=id;
-        	var elm =avalon(this);
-        	
-        	model.contbg='#d8d8d8';
-        	model.txt=getusrName(model.msgdata.alldata,id);
+        	var elm =avalon(this); 
+        	 elm.addClass('content-bg');
+        	model.txt=base.getusrName(model.msgdata.alldata,id);
         },
         connectSocketServer:function(){
                model.websocket = new WebSocketEx('ws://'+server.remote_ip+':'+server.remote_port+'/chatserver',"", function () {
@@ -68,7 +70,7 @@ require(['avalon','server','websocket','underscore'], function(avalon,server,Web
                 	model.defuid=parsedata.data.uid;
                 }
                if(parsedata.type && (parsedata.type===3 )){
-               	 model.msgdata=formatdata(parsedata.data); 
+               	 model.msgdata=base.formatdata(parsedata.data); 
                	  model.rootmsg=model.msgdata.root.sort(function(a,b){
                	  	return a.time-b.time;
                	  });
@@ -115,45 +117,12 @@ require(['avalon','server','websocket','underscore'], function(avalon,server,Web
         }
     });
     avalon.scan(document.body)
-    model.connectSocketServer();  
-   
-
-    
+    model.connectSocketServer();   
+    base.getWindow(model);
+    window.onresize=function(){
+    	  base.getWindow(model);
+    }
 });
  
- function formatdata(data){
- 	var rootdata=[],otherdata=[],curdata=[];
- 	curdata=data;
- 	for (var i = 0; i < curdata.length; i++) {
- 		if(curdata[i].atroot===0){
- 			rootdata.push(curdata[i]);
- 			curdata.splice(i,1);
- 			i--;
- 		}
- 	}
- 	for (var i = 0; i < curdata.length; i++) {
- 		for (var j = 0; j < rootdata.length; j++) {
- 			if(rootdata[j].atroot===curdata[i].mid){
- 				rootdata.push(curdata[i]);
- 			}else{
- 				otherdata.push(curdata[i]);
- 			}
- 		}
- 	}
- 	return{
- 		root:rootdata,
- 		other:otherdata,
- 		alldata:rootdata=rootdata.concat(otherdata)
- 	}
- 	
- }
- function getusrName(data,id){
- 	var name="";
- 	for (var i = 0; i < data.length; i++) {
- 		if(data[i].mid===id){
- 			name='@'+decodeURIComponent(data[i].username)+"：";
- 		}
- 	}
- 	return name;
- }
+
  

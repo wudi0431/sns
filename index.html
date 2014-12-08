@@ -40,7 +40,7 @@
 				<div class="allmsg">
 					查查所有的信息
 				</div>
-				<div class="contents">
+				<div class="contents" ms-css-height="middenheight">
 					<ul class="contents_ui">
 						<li class="contents_li" ms-click="chanelchange(el.atroot)"  ms-repeat="rootmsg"  ms-if-loop="(rootmsg.length-1) == $index">
 							<i class="contents_icon" ms-css-background={{el.color}}></i>
@@ -61,9 +61,9 @@
 					</ul>
 				</div>
 			</div>
-			<div class="main_right">
+			<div class="main_right" ms-css-width="rightwidth">
 				<!--<div ms-include-src="rightpage"></div>-->
-				<div class="msginfo "> 
+				<div class="msginfo" ms-css-height="msginfoheight"> 
 					<div class="content"  ms-css-background="contbg" ms-repeat='rightmsg' ms-click="selectmsg(el.mid)">
 						<ul class="content_ul">
 							<li class="content_li">
@@ -77,7 +77,7 @@
 				</div> 
 				<div class="sendmsg">
 					<i class="icon"  ms-css-background="defcolor"></i>
-					<input type="text"  ms-keydown='keydownsengmsg($event)' name="" ms-duplex='txt' ms-duplex='atid'  id="messageBox" placeholder="添加你的回复" value="" />
+					<input type="text" ms-css-width="rightwidth" ms-keydown='keydownsengmsg($event)' name="" ms-duplex='txt' ms-duplex='atid'  id="messageBox" placeholder="添加你的回复" value="" />
 					<div title="发送" ms-click='sendMessage' class="send triangle-right"></div>
 				</div>
 			</div>
