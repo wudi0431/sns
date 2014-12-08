@@ -1,0 +1,275 @@
+@import "base";
+@col:#333;
+ @bcol:#ccc;
+ .foo (@fr:left) {
+     float: @fr;
+}
+ .w(@w:100px){
+     width: @w;
+}
+ .h(@h:100px){
+     height: @h;
+}
+ .c(@c:@col){
+     color: @c;
+}
+ .pos(@pos:absolute){
+     position: @pos;
+}
+ .bg(@bg:@bcol){
+     background-color: @bg;
+}
+ .fz(@fz:14px){
+     font-size: @fz;
+}
+ .icons(@w:10px,@h:10px,@r:5px,@c:pink){
+     height:@w;
+     width:@h;
+     background:@c;
+     border-radius:@r;
+     .pos(relative);
+}
+ .main{
+     &_left{
+         .pos();
+         left: 0;
+         top: 0;
+         .w(60px);
+         .h(100%);
+         min-height: 734px;
+         .slider-nav-bg {
+             height: 100%;
+             .w(60px);
+             .pos();
+             top: 0;
+             left: 0;
+             .bg(#4a4a4a);
+        }
+         .nav{
+             &_li{
+                 .h(30px);
+                 line-height:30px;
+                 padding:15px 0;
+                 &:hover{
+                     .bg(#5d5d5d);
+                     cursor: pointer;
+                     .nav_icon1{
+                         .bgs(url(img/selected_1.png));
+                    }
+                     .nav_icon2{
+                         .bgs(url(img/selected_2.png));
+                    }
+                     .nav_icon3{
+                         .bgs(url(img/selected_3.png));
+                    }
+                     .nav_icon4{
+                         .bgs(url(img/selected_4.png));
+                    }
+                }
+                 .nav_icon{
+                     .w(28px);
+                     .h(28px);
+                     .pos();
+                     left:14px;
+                     display: inline-block;
+                }
+                 .bgs(@url:url(img/icon1.png)){
+                     background: @url no-repeat 0 0;
+                }
+                 .nav_icon1{
+                     .bgs();
+                }
+                 .nav_icon2{
+                     .bgs(url(img/icon2.png));
+                }
+                 .nav_icon3{
+                     .bgs(url(img/icon3.png));
+                }
+                 .nav_icon4{
+                     .bgs(url(img/icon4.png));
+                     .pos(fixed);
+                     bottom: 5%;
+                }
+                 .mgr{
+                     .c(#fff);
+                     .pos();
+                     top: 30px;
+                     left: 30px;
+                     background: red;
+                     height: 20px;
+                     width: 20px;
+                     border-radius: 10px;
+                     text-align: center;
+                     line-height: 22px;
+                }
+            }
+        }
+    }
+     &_midden{
+         .pos();
+         left:60px;
+         top:0;
+         .w(520px);
+         .h(100%);
+         min-height: 734px;
+         .title{
+             .bg(#f2f2f2);
+             text-align: center;
+             .h(60px);
+             line-height: 60px;
+        }
+         .allmsg{
+             .bg(#d8d8d8);
+             text-align: center;
+             .h(60px);
+             line-height: 60px;
+             -webkit-box-shadow:0 3px 3px rgba(193,193,193,0.8);
+             -moz-box-shadow:0 3px 3px rgba(193,193,193,0.8);
+             &:hover{
+                 cursor: pointer;
+                 .bg(#ededed);
+            }
+        }
+         .contents{
+             max-height:520px; 
+             overflow-x: hidden;
+             overflow-y: auto;
+            
+             &_li{
+                 .h(84px);
+                 line-height: 84px;
+                 list-style: none;
+                 border-bottom: 1px #ccc solid;
+                 padding: 0 0 0 10px;  
+                   white-space: nowrap;
+                    .w(520px);
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                 &:hover{
+                     cursor: pointer;
+                     .bg(#ededed);
+                }
+                
+            }
+             &_icon{
+                 .icons();
+                 .foo();
+                 top:38px;
+            }
+             &_span{
+                 padding:0 0 0 10px;
+            }
+        }
+    }
+     &_right{
+         .pos();
+         left:580px;
+         top:0;
+         border-left: 1px #ccc solid;
+         .h(100%);
+         .w(54%);
+         min-height: 734px;
+    }
+}
+ .msginfo{
+     overflow-x: hidden;
+     overflow-y: auto;
+     min-height: 534px;
+     .content{
+         border-bottom: 1px solid #f7f7f7; 
+         &_li{
+             list-style: none;
+            padding: 10px 0 10px 25px;
+             .fz();
+             line-height: 40px 
+        }
+         &_icon{
+             .icons();
+             top:15px;
+             left:-11px;
+             .foo();
+        }
+         &_op{
+             .c();
+             .fz();
+        }
+         &_msg{
+             .c();
+             white-space: normal;
+        }
+         &_time{
+             .c(#c6c8dc);
+             .foo(right);
+             padding: 0 30px 0 0;
+        }
+        :hover{
+            .bg(#f9f9f9);
+            cursor: pointer;
+            
+        }
+    }
+}
+ .sendmsg{
+     position: fixed;
+     bottom: 0;
+     .w(100%);
+     input{ 
+         .w(54%);
+         .h(40px);
+         .c(#c9c9c9);
+         line-height: 40px;
+         outline: none;
+         text-indent: 20px;
+    }
+     .icon{
+         .icons(10px,10px,5px,#c9c9c9);
+         .pos();
+         top: 17px;
+         margin: 0 0 0 10px;
+    }
+     .send{
+         .pos(fixed);
+         right: 10px;
+         z-index: 9999;
+         bottom: 12px;
+         cursor: pointer;
+    }
+}
+ .triangle-right {
+     .w(0);
+     .h(0);
+     border-width: 10px;
+     border-color: transparent transparent transparent #c6c6c7;
+     border-style: dashed dashed dashed solid;
+     display: inherit;
+}
+ .div {
+     overflow: hidden;
+     border-bottom: 1px solid #f7f7f7;
+     line-height: 40px;
+     padding: 10px 0 10px 25px;
+     &_icon{
+         .icons();
+         .foo();
+         top:15px;
+         left:-11px;
+    }
+     &_op{
+         .c();
+         .fz();
+         .foo();
+         .w(8%);
+    }
+     &_msg{
+         .c();
+         .foo();
+         .w(80%);
+    }
+     &_time{
+         .c(#c6c8dc);
+         .foo(right);
+         padding: 0 30px 0 0;
+    }
+}
+  
+ 

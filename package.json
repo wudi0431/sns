@@ -1,0 +1,13 @@
+{
+  "name": "sns",
+  "version": "0.0.1",
+  "description": "sns",
+  "keywords": [
+    "sns"
+  ],
+  "dependencies": {
+    "socket.io": "1.2.1"
+  },
+  "repository": "",
+  "license": "MIT"
+}
