@@ -2,6 +2,7 @@
     baseUrl: '',
     paths: {
         jquery: 'vendor/jquery/jquery-2.1.0',
+        emojis: 'vendor/jquery/jquery.emoji',
         avalon: "vendor/avalon/avalon",//必须修改源码，禁用自带加载器，或直接删提AMD加载器模块
         text: 'vendor/require/text',
         domReady: 'vendor/require/domReady',
@@ -25,7 +26,7 @@
 
 
 
-require(['avalon','server','websocket','base'], function(avalon,server,WebSocketEx,base) {//第二块，添加根VM（处理共用部分）
+require(['avalon','server','websocket','base','jquery','emojis'], function(avalon,server,WebSocketEx,base,$,emojis) {//第二块，添加根VM（处理共用部分）
    
     var model =avalon.define({
         $id: "root",  
@@ -33,8 +34,7 @@ require(['avalon','server','websocket','base'], function(avalon,server,WebSocket
         txt:"",
         defcolor:"",
         defuid:0,
-        atid:0,
-        contbg:"",
+        atid:0, 
         rightwidth:0,
         msginfoheight:0,
         middenheight:0,
@@ -43,19 +43,27 @@ require(['avalon','server','websocket','base'], function(avalon,server,WebSocket
         othermsg:[],
         rightmsg:[],
         sengmsg:[],
+        current: -1,
+        mcurrent: -1,
         userLogin:{"appkey":"ABCDEFG","channel":"1","username":"wiiiky@yeah.net","password":"123456"},
         historymsg:{"type":"2","data":{"before":"0","count":"10"}},
          gotoall:function(){
         	alert(111);
         },
-        chanelchange:function(id){
-        	 model.rightmsg = base.getRootMsg(model.msgdata.alldata,id);
+        chanelchange:function(rid,at,mid,index){
+             model.mcurrent = index;
+             model.current = -1;
+        	 model.rightmsg = base.getRootMsg(model.msgdata.alldata,rid,at,mid);
         },
-         selectmsg:function(id){ 
+         selectmsg:function(id,color,index){
+         	model.current = index
+         	 model.mcurrent = -1;
         	model.atid=id;
-        	var elm =avalon(this); 
-        	 elm.addClass('content-bg');
+        	model.defcolor=color; 
         	model.txt=base.getusrName(model.msgdata.alldata,id);
+        },
+        seeAllmsg:function(){
+        	 model.rightmsg = model.msgdata.alldata;
         },
         connectSocketServer:function(){
                model.websocket = new WebSocketEx('ws://'+server.remote_ip+':'+server.remote_port+'/chatserver',"", function () {
@@ -85,7 +93,8 @@ require(['avalon','server','websocket','base'], function(avalon,server,WebSocket
                }else if(parsedata.type && (parsedata.type===1 )){
                	var curdata=parsedata.data;
                	  model.msgdata.alldata.push(curdata[0]);
-               	 model.rightmsg.push(curdata[0]); 
+               	 model.rightmsg.push(curdata[0]);
+               	 base.upGroupData(parsedata.data,model);
                      
                }
 				model.websocket.onclose();
@@ -119,6 +128,23 @@ require(['avalon','server','websocket','base'], function(avalon,server,WebSocket
     avalon.scan(document.body)
     model.connectSocketServer();   
     base.getWindow(model);
+    avalon.filters.dataFilter = function(str, args){//str为管道符之前计算得到的结果，默认框架会帮你传入，此方法必须返回一个值
+          /* 具体逻辑 */ 
+           var day =  parseInt((Date.now()- new Date (args*1000))/86400000);
+           if(day >1 && day <=30){ 
+           	   return day+'天前';
+           }else if(day >30){
+           	    return '一个月前';
+           }else if(day<1){
+           	var time = base.changeTime(args);
+           	if(time<=0){
+           		time=str;
+           	}else{
+           		time+'前';
+           	}
+           	   return time;
+           } 
+       }
     window.onresize=function(){
     	  base.getWindow(model);
     }
