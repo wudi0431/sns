@@ -44,6 +44,7 @@ require(['avalon','server','websocket','base','jquery','emojis'], function(avalo
         rightmsg:[],
         sengmsg:[],
         current: -1,
+        showCurrent:false,
         mcurrent: -1,
         userLogin:{"appkey":"ABCDEFG","channel":"1","username":"wiiiky@yeah.net","password":"123456"},
         historymsg:{"type":"2","data":{"before":"0","count":"10"}},
@@ -53,14 +54,22 @@ require(['avalon','server','websocket','base','jquery','emojis'], function(avalo
         chanelchange:function(rid,at,mid,index){
              model.mcurrent = index;
              model.current = -1;
+             model.showCurrent=false;
         	 model.rightmsg = base.getRootMsg(model.msgdata.alldata,rid,at,mid);
         },
          selectmsg:function(id,color,index){
          	model.current = index
-         	 model.mcurrent = -1;
-        	model.atid=id;
-        	model.defcolor=color; 
-        	model.txt=base.getusrName(model.msgdata.alldata,id);
+         	model.showCurrent= !model.showCurrent;
+         	if(!model.showCurrent){
+         		model.txt="";
+         		model.atid=0;
+         	}else{
+         		model.atid=id;
+        		model.defcolor=color; 
+        		model.txt=base.getusrName(model.msgdata.alldata,id);
+         	}
+         	model.mcurrent = -1;
+        	
         },
         seeAllmsg:function(){
         	 model.rightmsg = model.msgdata.alldata;

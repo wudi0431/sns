@@ -64,7 +64,7 @@
 			<div class="main_right" ms-css-width="rightwidth">
 				<!--<div ms-include-src="rightpage"></div>-->
 				<div class="msginfo" ms-css-height="msginfoheight"> 
-					<div class="content"   ms-class="content-bg: $index == current"   ms-repeat='rightmsg' ms-click="selectmsg(el.mid,el.color,$index)">
+					<div class="content"   ms-class="content-bg: showCurrent && $index == current"   ms-repeat='rightmsg' ms-click="selectmsg(el.mid,el.color,$index)">
 						<ul class="content_ul">
 							<li class="content_li">
 								<i class="content_icon" ms-css-background={{el.color}}></i>

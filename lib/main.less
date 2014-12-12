@@ -49,7 +49,7 @@
              &_li{
                  .h(30px);
                  line-height:30px;
-                 padding:15px 0;
+                 padding:15px 0; 
                  &:hover{
                      .bg(#5d5d5d);
                      cursor: pointer;
@@ -135,9 +135,10 @@
              overflow-y: auto; 
              &_li{
                  .h(84px);
+                 
                  line-height: 84px;
                  list-style: none;
-                 border-bottom: 1px #ccc solid;
+                 border-bottom: 1px solid rgba(0,0,0,0.1);
                  padding: 0 0 0 10px;  
                    white-space: nowrap;
                     .w(520px);
@@ -150,12 +151,16 @@
                 
             }
              &_icon{
-                 .icons();
+                 .icons(6px,6px);
                  .foo();
-                 top:38px;
+                 top:40px;
             }
              &_span{
                  padding:0 0 0 10px;
+            }
+            a{
+                .c(#4A4A4A);
+                 .fz(20px);
             }
         }
         
@@ -164,9 +169,9 @@
          .pos();
          left:580px;
          top:0;
-         border-left: 1px #ccc solid;
+         border-left: 1px solid rgba(0,0,0,0.2);
          .h(100%); 
-         min-height: 734px;
+         min-width: 700px;
     }
 }
  .msginfo{
@@ -177,26 +182,28 @@
          border-bottom: 1px solid #f7f7f7; 
          &_li{
              list-style: none;
-            padding: 10px 0 10px 25px;
-             .fz();
-             line-height: 40px 
+             padding: 20px 0;
+             line-height: 30px;
+             .fz(16px); 
+             .c(#4A4A4A); 
         }
          &_icon{
              .icons();
-             top:15px;
-             left:-11px;
+              margin: 0 0 0 30px;
+              top: 11px;
              .foo();
         }
          &_op{
-             .c();
+             margin: 0 0 0 30px;
+             .c(#000);
              .fz();
         }
-         &_msg{
-             .c();
+         &_msg{ 
+             .c(#4A4A4A); 
              white-space: normal;
         }
          &_time{
-             .c(#c6c8dc);
+             .c(#c6c6c7);
              .foo(right);
              padding: 0 30px 0 0;
         }
