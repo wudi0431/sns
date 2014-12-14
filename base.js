@@ -40,6 +40,7 @@ define(function() {
 		model.rightwidth = (winWidth - 590) + 'px';
 		model.middenheight = (winHeight - 130) + 'px';
 		model.msginfoheight = (winHeight - 66) + 'px';
+		model.mainheight = (winHeight) + 'px';
 
 	}
 
@@ -99,7 +100,7 @@ define(function() {
 			for (var i = 0; i < rlen; i++) {
 
 				for (var j = 0; j < otherdata.length; j++) {
-					if (rootdata[i].mid == otherdata[j].atroot) {
+					if (rootdata[i] && rootdata[i].mid == otherdata[j].atroot) {
 						rootdata.splice(i, 1);
 						i--;
 						rlen--;
@@ -162,7 +163,7 @@ define(function() {
 				return h + '小时';
 			} else if (s > 0 && h == 0 && m == 0) {
 				return s + '秒';
-			} else if (s <= 0 && h == 0 && m == 0) {
+			} else if (s <= 0 && h <=0 && m <= 0) {
 				return s;
 			}
 		}

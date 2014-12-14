@@ -1,0 +1,50 @@
+<div ms-controller="rightpage">
+	 <section role="main" data-mode="normal search conf pref" class="main-area column">
+			<div data-mode="normal search conf pref" class="title-bar custom-titlebar-image custom-titlebar-bg custom-titlebar-fg">
+				<div class="left-area">
+					<h2 data-mode="normal" data-embed="none" class="room-title"  ms-duplex='titlemsg' id="room-title">{{titlemsg}}</h2>
+				</div>
+			</div>
+			<div data-mode="normal search" class="content-area">
+				<div class="chat-area-container">
+					<div class="chat-area hide-scroll">
+						<div class="infinite-above" style="height: 0px;"></div>
+						<div class="infinite-items">
+							<p class="chat-item chat-label-manualThreaded chat-item-timestamp-shown" ms-class="active current: showCurrent && $index == current" ms-repeat='rightmsg' ms-click="selectmsg(el.mid,el.color,$index)">
+								<span class="chat-item-dot" ms-css-background={{el.color}}></span>
+								<span class="chat-nick">{{decodeURIComponent(el.username)}}：</span>
+								<span class="chat-message">{{el.msg}}</span>
+								<span class="chat-timestamp">{{(el.time*1000) | date("HH:mm") | dataFilter(el.time)}}</span>
+								<!--<span class="chat-more"></span>-->
+							</p>
+						</div>
+						<div class="infinite-below lower-limit" style="height: 0px;"></div>
+					</div>
+				</div>
+			</div>
+			<div data-mode="conf" class="conf-area">
+			</div>
+			<div data-mode="pref" class="pref-area">
+			</div>
+			<div data-mode="normal search" class="chat-input">
+				<div class="chat-entry-wrap">
+					<div class="chat-conv-dot-wrap">
+						<span class="chat-conv-dot" ms-css-background="defcolor"></span>
+					</div>
+					<div id='ptextmsg' ms-click="cleardeftxt" class="chat-placeholder">{{placeholder}}</div>
+					<div role="textbox"  ms-keydown="keydowngettext" id='textmsg' ms-duplex='txt' ms-attr-atid='{{atid}}' class="chat-entry" ms-css-border-color="defcolor" contenteditable="true"></div>
+				</div>
+				<div id='sendmsg' ms-click="sendmsgstart" class="chat-send">
+					<svg version="1.1" ms-css-fill="{{defcolor}}" xmlns="http://www.w3.org/2000/svg" id="icon" width="28" height="28" viewBox="0 0 28 28">
+						<g transform="matrix(1.4744843,0,0,1.4744843,-3.6938117,-15.489686)">
+							<path d="m 5.1264798,20 c 0,-2 7.2e-4,-2 2,-2 l 6.0002502,0 -3.00025,-4 c 0,-3 1,-3 5,1 4.99276,5.99132 5,4 0,10 -4,4 -5,4 -5,1 l 3.00025,-4 -6.0002502,0 c -2.06669,0 -2,0 -2,-2 z" />
+						</g>
+					</svg>
+				</div>
+
+			</div>
+
+			</div>
+		</section>
+
+</div>

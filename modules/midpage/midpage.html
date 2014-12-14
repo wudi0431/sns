@@ -1,0 +1,34 @@
+<div ms-controller="midpage">
+	<section class="meta-area column" data-mode="normal search conf pref">
+			<ul role="tablist" class="meta-tabs custom-titlebar-bg custom-titlebar-fg">
+				<li role="tab" data-mode="normal" class="tab tab-info">
+					开发者直达频组
+				</li>
+			</ul>
+			<div data-mode="normal search" class="meta-panes">
+				<div role="tabpanel" class="pane pane-threads current">
+					<div class="pane-threads-wrap">
+						<div data-mode="normal" ms-class="current:ishouwbg" class="thread-item thread-all-discussions">
+							<h4 class="thread-title"  ms-click="seeAllmsg">查查所有的信息</h4>
+							<p class="thread-snippet"></p>
+						</div>
+						<div class="thread-item-container hide-scroll">
+							<div class="infinite-above" style="height: 0px;"></div>
+							<div class="infinite-items">
+								<div class="thread-item" ms-click="chanelchange(el.atroot,el.at,el.mid,el.msg,$index,1)" ms-class="current:$index == mcurrent" ms-mouseenter="mouseenter(el.color)" ms-mouseleave="mouseleave" ms-css-border-right-color="{{el.color}}" ms-repeat="rootmsg">
+									<h4 class="thread-title">{{el.msg}}</h4>
+									<p class="thread-snippet"></p>
+								</div>
+								<div class="thread-item" ms-click="chanelchange(el.atroot,el.at,el.mid,el.msg,$index,2)" ms-class="current:$index == othercurrent" ms-mouseenter="mouseenter(el.color)" ms-mouseleave="mouseleave" ms-css-border-right-color="{{el.color}}"  ms-repeat="othermsg">
+									<h4 class="thread-title">{{el.msg}}</h4> 
+									<p class="thread-snippet"></p>
+								</div>
+							</div>
+							<div class="infinite-below" style="height: 0px;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+</div>

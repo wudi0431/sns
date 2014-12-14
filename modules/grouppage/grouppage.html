@@ -1,0 +1,57 @@
+<div ms-controller="grouppage">
+	<section class="meta-area column" data-mode="normal search conf pref">
+			<ul role="tablist" class="meta-tabs custom-titlebar-bg custom-titlebar-fg">
+				<li role="tab" data-mode="normal" class="tab tab-info">
+					所有频组
+				</li>
+			</ul>
+			<div id="white">
+				<form method="get" action="/search" id="search">
+				  <input name="q" class="bef" type="text" size="40" placeholder="搜索你想要的频组" required="required">
+				  <a href="javascript:"  class="clear">ⅹ</a>
+				</form>
+			</div>  
+			<div data-mode="normal search" class="meta-panes">
+				<div role="tabpanel" class="pane pane-threads current">
+					<div class="pane-threads-wrap">
+						<div  class="hot-group">
+							<h4 class="hot-group-title">最热频组</h4>
+							<p class="thread-snippet"></p> 
+							<div class="hot-group-div">
+								<div class="line"></div>
+								<ul class="left-ul"> 
+									<li class="title">阿范德萨发生的</li>
+									<li class="reamk">阿范德萨发生的</li> 
+								</ul> 
+								<ul class="right-ul">  
+									<li class="msgcont"><i class="msgiocn"></i>124条消息</li>
+									<li class="opcont"><i class="opiocn"></i>12用户参与</li> 
+								</ul>
+							</div>
+							
+							
+						</div>
+						<div  class="hot-group grorp">
+							<h4 class="hot-group-title">最热频组</h4>
+							<p class="thread-snippet"></p>   
+						</div> 
+						<div class="thread-item-container hide-scroll">
+							<div class="infinite-above" style="height: 0px;"></div>
+							<div class="infinite-items">
+								<div class="thread-item" ms-click="chanelchange(el.atroot,el.at,el.mid,$index)" ms-class="current:$index == mcurrent" ms-mouseenter="mouseenter(el.color)" ms-mouseleave="mouseleave" ms-css-border-right-color="{{el.color}}" ms-repeat="rootmsg">
+									<h4 class="thread-title">一个用户组的名称</h4>
+									<p class="thread-snippet"></p>
+								</div>
+								<div class="thread-item" ms-click="chanelchange(el.atroot,el.at,el.mid,$index)" ms-class="current:$index == mcurrent" ms-mouseenter="mouseenter(el.color)" ms-mouseleave="mouseleave" ms-css-border-right-color="{{el.color}}"  ms-repeat="othermsg">
+									<h4 class="thread-title">另个用户组的名称</h4> 
+									<p class="thread-snippet"></p>
+								</div>
+							</div>
+							<div class="infinite-below" style="height: 0px;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+</div>

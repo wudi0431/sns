@@ -30,6 +30,7 @@
      .pos(relative);
 }
  .main{
+     overflow: hidden;
      &_left{
          .pos();
          left: 0;
@@ -197,6 +198,8 @@
              margin: 0 0 0 30px;
              .c(#000);
              .fz();
+             .w(76px);
+             text-align: left;
         }
          &_msg{ 
              .c(#4A4A4A); 
@@ -225,13 +228,14 @@
          .c(#c9c9c9);
          line-height: 40px;
          outline: none;
-         text-indent: 20px;
+         padding: 0 0 0 70px;
+        .fz(16px);
     }
      .icon{
          .icons(10px,10px,5px,#c9c9c9);
          .pos();
          top: 17px;
-         margin: 0 0 0 10px;
+         margin: 0 0 0 30px;
     }
      .send{
          .pos(fixed);
