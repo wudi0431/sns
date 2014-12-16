@@ -58,12 +58,12 @@ require(['avalon'], function(avalon) {//第二块，添加根VM（处理共用�
     require(['./modules/rightpage/rightpage'], function() {//第三块，加载其他模块
         avalon.log("加载其他完毕");
          avalon.vmodels.rightpage.connectSocketServer();  
-         
-    });
-     require(['./modules/midpage/midpage'], function() {//第三块，加载其他模块
+           require(['./modules/midpage/midpage'], function() {//第三块，加载其他模块
 	        avalon.log("加载其他完毕")
 	 });
      
+    });
+   
       
     
     

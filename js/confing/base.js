@@ -122,7 +122,7 @@ define(function() {
 			var name = "";
 			for (var i = 0; i < data.length; i++) {
 				if (data[i].mid === id) {
-					name = '@' + decodeURIComponent(data[i].username) + "：";
+					name = '@' + decodeURIComponent(data[i].username);
 				}
 			}
 			return name;

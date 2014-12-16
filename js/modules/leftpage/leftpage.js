@@ -24,8 +24,8 @@ define(["avalon", "text!../../../modules/leftpage/leftpage.html"], function(aval
         		leftmodel.iscurrent=false;
         		leftmodel.isfirstcurrent=true;
         		avalon.vmodels.root.midpage='midpage';
-        		avalon.vmodels.grouppage.gwst && avalon.vmodels.grouppage.gwst.onclose()
-        		avalon.vmodels.grouppage.cwst && avalon.vmodels.grouppage.cwst.onclose()
+        		avalon.vmodels.grouppage && avalon.vmodels.grouppage.gwst && avalon.vmodels.grouppage.gwst.onclose()
+        		avalon.vmodels.grouppage && avalon.vmodels.grouppage.cwst && avalon.vmodels.grouppage.cwst.onclose()
         		avalon.vmodels.rightpage.connectSocketServer();  
         	}
         	

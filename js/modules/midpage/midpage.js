@@ -15,19 +15,18 @@ define(["avalon", "text!../../../modules/midpage/midpage.html",'base'], function
         	}else{
         		model.mcurrent = -1;
         		 model.othercurrent = index; 
-        	} 
-        	 //model.titlemsg=msg;
+        	}  
              rightmodel.current = -1;
              rightmodel.oldcurrent=-1;
              rightmodel.showCurrent=false; 
              rightmodel.atid=0; 
          	 rightmodel.txt="";
-             $("#ptextmsg").text(midmdel.placeholder);
+             $("#ptextmsg").text(rightmodel.placeholder).css('color','');
+             $("#textmsg").text("");
         	 model.rightmsg = base.getRootMsg(model.msgdata.alldata,rid,at,mid);
         },
-         seeAllmsg:function(){
-         	model.titlemsg='查看所有消息';
-         	midmdel.ishouwbg=!midmdel.ishouwbg;
+         seeAllmsg:function(){ 
+           	midmdel.ishouwbg=!midmdel.ishouwbg;
         	 model.rightmsg = model.msgdata.alldata;
         	 model.mcurrent = -1;
         	 model.othercurrent = -1;

@@ -9,7 +9,17 @@
 		this.onerror = onerror;
 		this.websocket = null;
 		this.send = function(msg) {
-			websocket.send(msg);
+//			readyState表示连接有四种状态：
+//			CONNECTING (0)：表示还没建立连接；
+//			OPEN (1)： 已经建立连接，可以进行通讯；
+//			CLOSING (2)：通过关闭握手，正在关闭连接；
+//			CLOSED (3)：连接已经关闭或无法打开；
+			 if(websocket && websocket.readyState==1){ 
+				websocket.send(msg);  
+			}else{ 
+				throw Error('not readyState'); 
+			} 
+			
 		}
 		var support = "MozWebSocket" in window ? 'MozWebSocket' : ("WebSocket" in window ? 'WebSocket' : null);
 

@@ -2463,20 +2463,22 @@ body[class*=webview-] [data-webview=none] {
 .room-item .room-item-unread-count.mentioned {
 	background-color: #ef513d
 }
-.room-item .nav_icon {
-	background: url(../images/icon3.png) no-repeat 0 0;
-	width: 16px;
-	height: 16px;
+.room-item .nav_icon { 
+	width: 20px;
+	height: 20px;
 	display: inline-block;
+	position: relative;
+	top: 5px;
+	left: -5px;
 }
 .room-item .nav_icon1 {
-	background: url(../images/icon3.png) no-repeat 0 0;
+	background: url(../images/guanfang.png) no-repeat 0 0;
 }
 .room-item .nav_icon2 {
-	background: url(../images/icon4.png) no-repeat 0 0;
+	background: url(../images/all.png) no-repeat 0 0;
 }
 .room-item .nav_icon3 {
-	background: url(../images/icon4.png) no-repeat 0 0;
+	background: url(../images/setting.png) no-repeat 0 0;
 }
 .room-area-create-new {
 	position: absolute;
@@ -2505,11 +2507,11 @@ body[class*=webview-] [data-webview=none] {
 	background-color: rgba(0, 0, 0, .5)
 }
 .room-area-create-new a:before {
-	content: "+";
+	content: "";
 	color: #3ca;
 	font-size: 1.5em;
 	vertical-align: -.1em;
-	margin: 0 .5em
+	margin: 0 5px;
 }
 .meta-area {
 	left: -13em;
@@ -2891,6 +2893,14 @@ body[class*=webview-] [data-webview=none] {
 	background-color: #677271;
 	color: #fff;
 }
+.thread-newitem:hover {
+	background-color: #fff;
+	color: rgba(0, 0, 0, .6);
+}
+  .thread-newitem.newcurrent{
+	background-color: #fff; 
+}
+
 .thread-item.conv-0 {
 	border-right-color: #2ba
 }
@@ -3015,6 +3025,9 @@ body[class*=webview-] [data-webview=none] {
 .thread-title {
 	margin: 0;
 	font-size: 14px;
+}
+.thread-titlebg {
+	background: #d8d8d8;
 }
 .meta-conf,
 .meta-pref {
@@ -5114,12 +5127,7 @@ body:not(.role-owner) .chat-item.chat-label-hidden {
 	color: rgba(0, 0, 0, 0.2);
 	outline: none;
 }
-#white ::-ms-clear {
-	display: none;
-}
-#white :valid + .clear {
-	display: inline;
-}
+ 
 .hot-group{
 	padding: 0 1.5em;
 	font-size: 14px;

@@ -9,11 +9,14 @@ define(["avalon", "text!../../../modules/grouppage/grouppage.html",'base','serve
         hot:{},
         channelid:"1",
         gwst:"",
-        cwst:"",
+        cwst:"", 
         channelLogin:{"appkey":"ABCDEFG","channel":"1","username":"wiiiky@yeah.net","password":"123456"},
         groupdata:{},
         searchdata:{},
-        channelList:[],
+        channelList:[], 
+        toggleX:false, 
+        gcurrent:-1,
+        oldtime:0,
         init:function(){
         	  $.ajax({
 		           type: "GET",
@@ -54,12 +57,14 @@ define(["avalon", "text!../../../modules/grouppage/grouppage.html",'base','serve
 				groupmdel.gwst.onclose();
             }, function (evt) {
                  alert('error' + evt.data);
-            });
-        	
-        	
+            }); 
+       
         },
         search:function(e){
-        	if(e.which===13){
+        	if(groupmdel.searchtxt!=""){
+        		groupmdel.toggleX=true;
+        	}
+        	if(e.which===13 && groupmdel.searchtxt!=""){
         		  $.ajax({
 		           type: "GET",
 		           url:server.protocol+server.remote_ip+"/api/web/search_channel",
@@ -74,39 +79,57 @@ define(["avalon", "text!../../../modules/grouppage/grouppage.html",'base','serve
 		          	
 		          }
 	        });
-        	   groupmdel.searchtxt=""; 
+        	   
         	} 
         	
         },
         cleaersearch:function(){
         	groupmdel.searchtxt="";
-        },
-        changeGroup:function(id,description){ 
-        	model.userLogin.$model.channel=id;
-        	  model.titlemsg=decodeURIComponent(description);
-        	   groupmdel.cwst = new WebSocketEx('ws://'+server.remote_ip+':'+server.remote_port+'/chatserver',"", function () {
-               groupmdel.cwst.send(JSON.stringify(model.userLogin.$model)); 
-            }, function () {
-               	//alert('close');
-            }, function (evt) { 
-            	var parsedata = JSON.parse(evt.data); 
-                parsedata.type===7 && groupmdel.cwst.send(JSON.stringify(model.historymsg.$model));
-                if(parsedata.type===7){
-                	rightmodel.defcolor=parsedata.data.color;
-                	rightmodel.defuid=parsedata.data.uid;
-                }
-               if(parsedata.type && (parsedata.type===3 )){  
-               	 model.rightmsg=parsedata.data.sort(function(a,b){
-               	  	return a.time-b.time;
-               	  });
-               }else if(parsedata.type && (parsedata.type===1 )){
-               	var curdata=parsedata.data; 
-               	 model.rightmsg.push(curdata[0]); 
-               }
-				groupmdel.cwst.onclose();
-            }, function (evt) {
-                 alert('error' + evt.data);
-            });
+    		groupmdel.toggleX=false; 
+    	   $('#searchipt').focus();
+        },  
+        changeGroup:function(id,description,index){ 
+        	  if(groupmdel.oldtime===0){
+        	  	  groupmdel.oldtime= Date.now(); 
+        	  }else{
+        	  	var newtime= Date.now(); 
+        	  	var chatime = newtime-groupmdel.oldtime;
+        	  	console.log(chatime);
+        	  	  if(chatime<1000){ 
+        	  	  	  return false;
+        	  	  }else{
+        	  	  	 model.userLogin.$model.channel=id;
+		        	  groupmdel.gcurrent=index;
+		        	  model.titlemsg=decodeURIComponent(description);
+		        	  if(groupmdel.gwst!="") groupmdel.gwst="";
+		        	  if(groupmdel.cwst!="") groupmdel.cwst="";
+		        	   groupmdel.cwst = new WebSocketEx('ws://'+server.remote_ip+':'+server.remote_port+'/chatserver',"", function () {
+		               groupmdel.cwst.send(JSON.stringify(model.userLogin.$model)); 
+		            }, function () {
+		               	//alert('close');
+		            }, function (evt) { 
+		            	var parsedata = JSON.parse(evt.data); 
+		                parsedata.type===7 && groupmdel.cwst.send(JSON.stringify(model.historymsg.$model));
+		                if(parsedata.type===7){
+		                	rightmodel.defcolor=parsedata.data.color;
+		                	rightmodel.defuid=parsedata.data.uid;
+		                }
+		               if(parsedata.type && (parsedata.type===3 )){  
+		               	 model.rightmsg=parsedata.data.sort(function(a,b){
+		               	  	return a.time-b.time;
+		               	  });
+		               }else if(parsedata.type && (parsedata.type===1 )){
+		               	var curdata=parsedata.data; 
+		               	 model.rightmsg.push(curdata[0]); 
+		               }
+						groupmdel.cwst.onclose();
+		            }, function (evt) {
+		                 alert('error' + evt.data);
+		            }); 
+        	  	  	
+        	  	  }
+        	  } 
+        	 
         	 
         }
     })

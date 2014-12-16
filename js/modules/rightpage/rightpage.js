@@ -56,6 +56,7 @@ define(["avalon", "text!../../../modules/rightpage/rightpage.html",'server','web
         selectmsg:function(id,color,index){
          	rightmodel.current = index;
          	  $("#textmsg").focus();
+         	   $("#textmsg").text("");
          	  $("#textmsg").css('text-indent','72px');
          	if(rightmodel.oldcurrent===index && rightmodel.oldcurrent!=-1){
          		rightmodel.showCurrent=true;
@@ -70,13 +71,13 @@ define(["avalon", "text!../../../modules/rightpage/rightpage.html",'server','web
          		rightmodel.atid=0; 
          		rightmodel.txt="";
          		$("#textmsg").text("");
-         		$("#ptextmsg").text(rightmodel.placeholder);
+         		$("#ptextmsg").text(rightmodel.placeholder).css('color','');
          		$("#textmsg").css('text-indent','0px');
          	}else{
          		rightmodel.atid=id;
         		rightmodel.defcolor=color; 
         		rightmodel.txt=base.getusrName(model.msgdata.alldata,id); 
-        		$("#ptextmsg").text(rightmodel.txt);
+        		$("#ptextmsg").text(rightmodel.txt).css('color','#434a49');
         		 
          	}
          	model.mcurrent = -1;
@@ -94,11 +95,11 @@ define(["avalon", "text!../../../modules/rightpage/rightpage.html",'server','web
 						"at":rightmodel.atid,				//# at的消息id，0表示没有at,消息id大于0
 					}
 				}
-        	rightmodel.websocket.send(JSON.stringify(sendparm)); 
+        	rightmodel.wst.send(JSON.stringify(sendparm)); 
         	rightmodel.txt=""; 
         	rightmodel.atid=0; 
         	$("#textmsg").text("");
-        	 $("#ptextmsg").text(rightmodel.placeholder);
+        	 $("#ptextmsg").text(rightmodel.placeholder).css('color','');
         	 $("#textmsg").css('text-indent','0px');
         	}
         	
@@ -106,27 +107,26 @@ define(["avalon", "text!../../../modules/rightpage/rightpage.html",'server','web
         cleardeftxt:function(){
         	   $("#textmsg").focus();  
 	     	  if(!rightmodel.showCurrent){
-	     	  	 $("#ptextmsg").text("");
+	     	  	 $("#ptextmsg").text("").css('color','');
 	     	  }else{ 
 	    		$("#textmsg").text("");
    
         	}	
         },
-        keydowngettext:function(e){
-        	
-                 $("#textmsg").focus(); 
-                 $("#ptextmsg").text(""); 
+        keydowngettext:function(e){ 
+                 $("#textmsg").focus();  
 		     	  if(e.which===13){
 		     	    rightmodel.txt+=  $("#textmsg").text();
 		    	    rightmodel.atid=~~ $("#textmsg").attr('atid');
 		    		rightmodel.sendMessage(); 
+		    		  $("#ptextmsg").text("").css('color',''); 
 		     	  }  
         },
         sendmsgstart:function(){
         	 rightmodel.txt+= $("#textmsg").text();
     	    rightmodel.atid=~~$("#textmsg").attr('atid');
     		rightmodel.sendMessage();   
-    		$("#ptextmsg").text(rightmodel.placeholder);
+    		$("#ptextmsg").text(rightmodel.placeholder).css('color','');
     		$("#textmsg").text("");
         }
     })
