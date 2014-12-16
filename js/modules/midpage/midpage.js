@@ -1,4 +1,4 @@
-define(["avalon", "text!./midpage.html",'base'], function(avalon, midpage,base) {
+define(["avalon", "text!../../../modules/midpage/midpage.html",'base'], function(avalon, midpage,base) {
 
     avalon.templateCache.midpage = midpage
     var model=avalon.vmodels.root;
@@ -16,7 +16,7 @@ define(["avalon", "text!./midpage.html",'base'], function(avalon, midpage,base) 
         		model.mcurrent = -1;
         		 model.othercurrent = index; 
         	} 
-        	model.titlemsg=msg;
+        	 //model.titlemsg=msg;
              rightmodel.current = -1;
              rightmodel.oldcurrent=-1;
              rightmodel.showCurrent=false; 
@@ -35,6 +35,11 @@ define(["avalon", "text!./midpage.html",'base'], function(avalon, midpage,base) 
         	 rightmodel.txt="";
          	 rightmodel.atid=0;
         }, 
+        init:function(){
+          require(['./modules/midpage/midpage'], function() {//第三块，加载其他模块
+		        avalon.log("加载其他完毕")
+		    });
+        }
     })
     avalon.vmodels.root.midpage = "midpage"
       

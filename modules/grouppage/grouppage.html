@@ -6,10 +6,10 @@
 				</li>
 			</ul>
 			<div id="white">
-				<form method="get" action="/search" id="search">
-				  <input name="q" class="bef" type="text" size="40" placeholder="搜索你想要的频组" required="required">
-				  <a href="javascript:"  class="clear">ⅹ</a>
-				</form>
+				<div id="search">
+				  <input name="q" class="bef" type="text" ms-keydown="search" ms-duplex='searchtxt' size="40" placeholder="搜索你想要的频组" required="required">
+				  <a href="javascript:" ms-click='cleaersearch' class="clear">X</a>
+				</div>
 			</div>  
 			<div data-mode="normal search" class="meta-panes">
 				<div role="tabpanel" class="pane pane-threads current">
@@ -20,12 +20,12 @@
 							<div class="hot-group-div">
 								<div class="line"></div>
 								<ul class="left-ul"> 
-									<li class="title">阿范德萨发生的</li>
-									<li class="reamk">阿范德萨发生的</li> 
+									<li class="title">{{decodeURIComponent(hot.cname)}}</li>
+									<li class="reamk">{{decodeURIComponent(hot.description)}}</li> 
 								</ul> 
 								<ul class="right-ul">  
-									<li class="msgcont"><i class="msgiocn"></i>124条消息</li>
-									<li class="opcont"><i class="opiocn"></i>12用户参与</li> 
+									<li class="msgcont"><i class="msgiocn"></i>{{hot.mcount}}条消息</li>
+									<li class="opcont"><i class="opiocn"></i>{{hot.members}}用户参与</li> 
 								</ul>
 							</div>
 							
@@ -38,14 +38,10 @@
 						<div class="thread-item-container hide-scroll">
 							<div class="infinite-above" style="height: 0px;"></div>
 							<div class="infinite-items">
-								<div class="thread-item" ms-click="chanelchange(el.atroot,el.at,el.mid,$index)" ms-class="current:$index == mcurrent" ms-mouseenter="mouseenter(el.color)" ms-mouseleave="mouseleave" ms-css-border-right-color="{{el.color}}" ms-repeat="rootmsg">
-									<h4 class="thread-title">一个用户组的名称</h4>
+								<div class="thread-item" ms-click="changeGroup(el.cid,el.description)" ms-repeat="channelList">
+									<h4 class="thread-title">{{decodeURIComponent(el.cname)}}</h4>
 									<p class="thread-snippet"></p>
-								</div>
-								<div class="thread-item" ms-click="chanelchange(el.atroot,el.at,el.mid,$index)" ms-class="current:$index == mcurrent" ms-mouseenter="mouseenter(el.color)" ms-mouseleave="mouseleave" ms-css-border-right-color="{{el.color}}"  ms-repeat="othermsg">
-									<h4 class="thread-title">另个用户组的名称</h4> 
-									<p class="thread-snippet"></p>
-								</div>
+								</div> 
 							</div>
 							<div class="infinite-below" style="height: 0px;"></div>
 						</div>

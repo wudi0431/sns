@@ -1,12 +1,10 @@
-define(["avalon", "text!./rightpage.html",'server','websocket','base','jquery'], function(avalon, rightpage,server,WebSocketEx,base,$) {
+define(["avalon", "text!../../../modules/rightpage/rightpage.html",'server','websocket','base','jquery'], function(avalon, rightpage,server,WebSocketEx,base,$) {
 
     avalon.templateCache.rightpage = rightpage;
-    var model= avalon.vmodels.root; 
+    var model= avalon.vmodels.root;  
     var rightmodel =avalon.define({
-        $id: "rightpage",
-        userLogin:{"appkey":"ABCDEFG","channel":"1","username":"wiiiky@yeah.net","password":"123456"},
-        historymsg:{"type":"2","data":{"before":"0","count":"10"}}, 
-        websocket:"",
+        $id: "rightpage", 
+        wst:"",
         txt:"",
         placeholder:"添加你的回复",
         defcolor:"",
@@ -16,13 +14,15 @@ define(["avalon", "text!./rightpage.html",'server','websocket','base','jquery'],
         showCurrent:false,
         oldcurrent:-1, 
         connectSocketServer:function(){
-               rightmodel.websocket = new WebSocketEx('ws://'+server.remote_ip+':'+server.remote_port+'/chatserver',"", function () {
-               rightmodel.websocket.send(JSON.stringify(rightmodel.userLogin.$model)); 
+        	model.titlemsg='官方频组';
+        	model.userLogin.$model.channel="1";
+               rightmodel.wst = new WebSocketEx('ws://'+server.remote_ip+':'+server.remote_port+'/chatserver',"", function () {
+               rightmodel.wst.send(JSON.stringify(model.userLogin.$model)); 
             }, function () {
                	//alert('close');
             }, function (evt) { 
             	var parsedata = JSON.parse(evt.data); 
-                parsedata.type===7 && rightmodel.websocket.send(JSON.stringify(rightmodel.historymsg.$model));
+                parsedata.type===7 && rightmodel.wst.send(JSON.stringify(model.historymsg.$model));
                 if(parsedata.type===7){
                 	rightmodel.defcolor=parsedata.data.color;
                 	rightmodel.defuid=parsedata.data.uid;
@@ -34,7 +34,7 @@ define(["avalon", "text!./rightpage.html",'server','websocket','base','jquery'],
                	  });
                	 model.othermsg=model.msgdata.other.sort(function(a,b){
                	  	return a.time-b.time;
-               	  });;
+               	  });
                	 model.rightmsg=model.msgdata.alldata.sort(function(a,b){
                	  	return a.time-b.time;
                	  });;
@@ -47,7 +47,7 @@ define(["avalon", "text!./rightpage.html",'server','websocket','base','jquery'],
                	 base.upGroupData(parsedata.data,model);
                      
                }
-				rightmodel.websocket.onclose();
+				rightmodel.wst.onclose();
             }, function (evt) {
                  alert('error' + evt.data);
             });

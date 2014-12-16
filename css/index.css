@@ -2366,7 +2366,7 @@ body[class*=webview-] [data-webview=none] {
 }
 .hide-scroll {
 	overflow-y: scroll;
-	margin-right: -15px;
+	margin-right: -17px;
 }
 .room-area {
 	left: -28em;
@@ -2464,19 +2464,19 @@ body[class*=webview-] [data-webview=none] {
 	background-color: #ef513d
 }
 .room-item .nav_icon {
-	background: url(/lib/img/icon3.png) no-repeat 0 0;
+	background: url(../images/icon3.png) no-repeat 0 0;
 	width: 16px;
 	height: 16px;
 	display: inline-block;
 }
 .room-item .nav_icon1 {
-	background: url(/lib/img/icon3.png) no-repeat 0 0;
+	background: url(../images/icon3.png) no-repeat 0 0;
 }
 .room-item .nav_icon2 {
-	background: url(/lib/img/icon4.png) no-repeat 0 0;
+	background: url(../images/icon4.png) no-repeat 0 0;
 }
 .room-item .nav_icon3 {
-	background: url(/lib/img/icon4.png) no-repeat 0 0;
+	background: url(../images/icon4.png) no-repeat 0 0;
 }
 .room-area-create-new {
 	position: absolute;
@@ -4162,7 +4162,7 @@ body:not(.role-owner) .chat-item.chat-label-hidden {
 	transform: translate3d(3.5em, 0, 0);
 	position: absolute;
 	display: block;
-	background-image: url(/lib/img/chat-more.svg);
+	background-image: url(../images/img/chat-more.svg);
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: 2em 2em;
@@ -5081,7 +5081,7 @@ body:not(.role-owner) .chat-item.chat-label-hidden {
 	width: 100%;
 }
 #white #search input[type="text"] {
-	background: url(img/search-white.png) no-repeat 10px 6px #fcfcfc;
+	background: url(../images//search-white.png) no-repeat 10px 6px #fcfcfc;
 	border: 1px solid #d1d1d1;
 	font:14px Arial, Helvetica, Sans-serif;
 	color: rgba(0, 0, 0, 0.4);
@@ -5187,7 +5187,7 @@ top: 20px;
 	position: absolute;
 	right: 75px;
 	top: 3px;
-	background: url(img/msg.png) no-repeat 0 0;
+	background: url(../images/msg.png) no-repeat 0 0;
 }
 .opiocn{
 	width: 16px;
@@ -5196,7 +5196,7 @@ top: 20px;
 	position: absolute;
 	right: 75px;
 	top: 3px;
-	background: url(img/op.png) no-repeat 0 0;
+	background: url(../images//op.png) no-repeat 0 0;
 }
 .grorp{
 	margin: 25px 0 0 0;
