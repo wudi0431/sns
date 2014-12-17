@@ -76,7 +76,7 @@ define(["avalon", "text!../../../modules/rightpage/rightpage.html",'server','web
          	}else{
          		rightmodel.atid=id;
         		rightmodel.defcolor=color; 
-        		rightmodel.txt=base.getusrName(model.msgdata.alldata,id); 
+        		rightmodel.txt=base.getusrName(model.rightmsg,id); 
         		$("#ptextmsg").text(rightmodel.txt).css('color','#434a49');
         		 
          	}

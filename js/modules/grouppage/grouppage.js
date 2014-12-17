@@ -46,7 +46,7 @@ define(["avalon", "text!../../../modules/grouppage/grouppage.html",'base','serve
                 	rightmodel.defcolor=parsedata.data.color;
                 	rightmodel.defuid=parsedata.data.uid;
                 }
-               if(parsedata.type && (parsedata.type===3 )){  
+               if(parsedata.type && (parsedata.type===3 )){
                	 model.rightmsg=parsedata.data.sort(function(a,b){
                	  	return a.time-b.time;
                	  });
